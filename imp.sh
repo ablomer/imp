@@ -19,7 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Created: 09/18/2012
-# Updated: 09/24/2012 (v1.1)
+# Updated: 09/27/2012 (v1.1b)
 
 # TODO: Add customizable directory options for backup, builds (regular and debug), executables, logs, ...
 # TODO: Display GDB and SCRIPT versions, if possible.
@@ -27,10 +27,10 @@
 
 # Defaults:
 BACKUP=false	# Create a backup folder and source file.
-LOG=false	# Create log file with SCRIPT.
-DEBUG=false	# Build with symbols and execute in GDB.
-RUN=false	# Execute after build.
-CLEAN=false	# Delete files created by NASM and GDB.
+LOG=false		# Create log file with SCRIPT.
+DEBUG=false		# Build with symbols and execute in GDB.
+RUN=false		# Execute after build.
+CLEAN=false		# Delete files created by NASM and GDB.
 
 TITLE="IMP Copyright (C) 2012 Augusto A. Blomer"
 
@@ -56,7 +56,7 @@ until [ -z "$1" ]; do
 		-h|--help)  HELP=true; shift ;;
 		-w|--copyright)  COPYRIGHT=true; shift;;
 		-|--) shift ; break ;;
-		-*) echo "Invalid option \'$1\'" exit 2 ;;
+		-*) echo "Invalid option '$1'" ; exit 2 ;;
 		*) args+=("$1") ; shift ;;
 	esac
 done
@@ -178,7 +178,7 @@ if $DEBUG ; then
 
 	if $LOG ; then
 		# Run GDB in SCRIPT.
-		script -c gdb ./a.out $NOW.log
+		script -c "gdb ./a.out" $NOW.log
 
 	else
 		# Run the executable created by LOAD in GDB.
